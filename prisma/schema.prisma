@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+}
+
+model ZohoConnection {
+  id               String   @id @default(cuid())
+  organizationId   String
+  organizationName String
+  accessToken      String
+  refreshToken     String?
+  region           String
+  currency         String
+  createdByEmail   String
+  createdAt        DateTime @default(now())
+}
